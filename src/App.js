@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import Hangman from './Hangman';
+// eslint-disable-next-line
 import { done, randomWord, renderWord } from './words';
 import './style.css';
 
@@ -14,19 +15,24 @@ console.log(word, guesses, renderWord(word, guesses), done(word, guesses))
 class App extends PureComponent {
   constructor() {
     super()
+    const letters = 'abcdefghijklmnopqrstuvwxyz'.split('')
     this.state = {
       progress: 0,
       word: randomWord(),
       guesses: [],
-      message: ''
+      message: '',
+      letters
     }
   }
 
   render() {
-    const { progress, word, guesses, message } = this.state
+    // eslint-disable-next-line
+    const { progress, word, guesses, message, letters } = this.state
+
+
 
     if (this.state.word === renderWord(word, guesses)) {
-      return (<div className='win'>You won!</div>)
+      this.setState({ message: 'Congratulations! You won!' })
     }
 
     if (this.state.progress > 5) {
@@ -36,16 +42,18 @@ class App extends PureComponent {
     const renderInputButton = (letter) => {
       return <button
         id={letter}
+        key={letter}
         onClick={() => {
           this.setState({ guesses: [letter, ...guesses] });
           if (word.indexOf(letter) < 0) {
             this.setState({ progress: progress + 1 });
           }
+          letters.splice(letter, 1)
         }}>
         {letter}
       </button>
     }
-    const letters = 'abcdefghijklmnopqrstuvwxyz'.split('')
+
     return (
       <div className='main' >
         <div>
@@ -56,7 +64,7 @@ class App extends PureComponent {
           {'word: ' + this.state.word}
         </div> */}
         <div>
-          {'guesses: ' + this.state.guesses}
+          {'Your guesses: ' + this.state.guesses}
         </div >
         <div
           className='word'>
@@ -75,10 +83,11 @@ class App extends PureComponent {
           progress: 0,
           word: randomWord(),
           guesses: [],
-          message: ''
+          message: '',
+          letters
         })
         }>
-          New game
+          Start a new game
           </button>
         <div>
         </div>

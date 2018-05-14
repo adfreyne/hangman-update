@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+// eslint-disable-next-line
 import { renderWord } from './words.js'
 // you don't need to edit this file.
 
