@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-
+import { renderWord } from './words.js'
 // you don't need to edit this file.
 
 class Hangman extends PureComponent {
@@ -46,7 +46,9 @@ class Hangman extends PureComponent {
           <text x="0" y="180" fill="red" stroke="black" style={{ fontSize: '50px', color: 'red' }}>
             VERY SAD !!
           </text>
-
+          {/* <text x="0" y="240" fill="red" stroke="black" style={{ fontSize: '20px', color: 'red' }}>
+            The correct word was {tword}
+          </text> */}
         </g>
       </svg>
     )

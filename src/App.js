@@ -17,18 +17,20 @@ class App extends PureComponent {
     this.state = {
       progress: 0,
       word: randomWord(),
-      guesses: []
+      guesses: [],
+      message: ''
     }
   }
 
   render() {
-    const { progress, word, guesses } = this.state
+    const { progress, word, guesses, message } = this.state
 
     if (this.state.word === renderWord(word, guesses)) {
       return (<div className='win'>You won!</div>)
     }
+
     if (this.state.progress > 5) {
-      return (<div>The correct word was {word}</div>)
+      this.setState({ message: 'The correct word was :' + word })
     }
 
     const renderInputButton = (letter) => {
@@ -37,7 +39,7 @@ class App extends PureComponent {
         this.setState({ guesses: [letter, ...guesses] });
 
         if (word.indexOf(letter) < 0) {
-          this.setState({ progress: progress + 1 })
+          this.setState({ progress: progress + 1 });
         }
       }}>
         {letter}
@@ -45,7 +47,7 @@ class App extends PureComponent {
     }
     const letters = 'abcdefghijklmnopqrstuvwxyz'.split('')
     return (
-      <div tabIndex='main' >
+      <div className='main' >
         <div>
           {/* This is how we render the hanging man */}
           <Hangman progress={progress} />
@@ -56,10 +58,12 @@ class App extends PureComponent {
         <div>
           {'guesses: ' + this.state.guesses}
         </div >
-        <div>
-          <p className='word'>
-            {'Your word: ' + renderWord(word, guesses)}
-          </p>
+        <div
+          className='word'>
+          {'Your word: ' + renderWord(word, guesses)}
+        </div>
+        <div className='message'>
+          {this.state.message}
         </div>
         <div>
           {letters.map(renderInputButton)}
