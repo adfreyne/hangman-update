@@ -34,14 +34,14 @@ class App extends PureComponent {
     }
 
     const renderInputButton = (letter) => {
-      return <button id={letter} onClick={() => {
-
-        this.setState({ guesses: [letter, ...guesses] });
-
-        if (word.indexOf(letter) < 0) {
-          this.setState({ progress: progress + 1 });
-        }
-      }}>
+      return <button
+        id={letter}
+        onClick={() => {
+          this.setState({ guesses: [letter, ...guesses] });
+          if (word.indexOf(letter) < 0) {
+            this.setState({ progress: progress + 1 });
+          }
+        }}>
         {letter}
       </button>
     }
