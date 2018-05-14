@@ -71,6 +71,15 @@ class App extends PureComponent {
         <button onClick={() => this.setState({ progress: progress + 1 })}>
           Hang The Man !
         </button>
+        <button onClick={() => this.setState({
+          progress: 0,
+          word: randomWord(),
+          guesses: [],
+          message: ''
+        })
+        }>
+          New game
+          </button>
         <div>
         </div>
       </div >)
